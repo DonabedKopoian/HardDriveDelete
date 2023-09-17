@@ -56,7 +56,7 @@ Guid fileName = Guid.NewGuid();
 while (driveName is not null && totalFreeSpace > 0)
 {
 	FileStream tempFile = new FileStream(
-		@$"{driveName}\{fileName}{fileNumber:D3}.nil",
+		@$"{driveName}:\{fileName}{fileNumber:D3}.nil",
 		FileMode.Create,
 		FileAccess.Write,
 		FileShare.Read);
