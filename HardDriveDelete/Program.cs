@@ -55,12 +55,26 @@ Guid fileName = Guid.NewGuid();
 
 while (driveName is not null && totalFreeSpace > 0)
 {
-	FileStream tempFile = new FileStream(
-		@$"{driveName}:\{fileName}{fileNumber:D3}.nil",
-		FileMode.Create,
-		FileAccess.Write,
-		FileShare.Read);
-
+	try
+	{
+		FileStream tempFile = new FileStream(
+			@$"{driveName}:\{fileName}{fileNumber:D3}.nil",
+			FileMode.Create,
+			FileAccess.Write,
+			FileShare.Read);
+	}
+	catch (Exception e)
+	{
+		if (e is UnauthorizedAccessException)
+		{
+			Console.WriteLine("Please exit this program and run as an administrator");
+		}
+		else
+		{
+			Console.WriteLine($"Exception of type {e.GetType()} occurred: {e}");
+		}
+		Console.ReadLine();
+	}
 	Console.WriteLine($"File {fileNumber + 1} successfully created.");
 
 	// refresh driveInfo
