@@ -53,16 +53,18 @@ long fileSize = totalFreeSpace / (totalFiles - 1);
 int fileNumber = 0;
 Guid fileName = Guid.NewGuid();
 
-while (totalFreeSpace > 0)
+while (driveName is not null && totalFreeSpace > 0)
 {
 	FileStream tempFile = new FileStream(
-		@$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\{fileName}{fileNumber:D3}.nil",
+		@$"{driveName}\{fileName}{fileNumber:D3}.nil",
 		FileMode.Create,
 		FileAccess.Write,
 		FileShare.Read);
 
 	Console.WriteLine($"File {fileNumber + 1} successfully created.");
 
+	// refresh driveInfo
+	driveInfo = new DriveInfo(driveName);
 	totalFreeSpace = driveInfo.TotalFreeSpace;
 
 	if (totalFreeSpace < fileSize)
@@ -78,4 +80,4 @@ while (totalFreeSpace > 0)
 	Console.WriteLine($"Progress: {(decimal)totalFiles/fileNumber++:F2}%");
 }
 
-Console.WriteLine("Hard drive is now full!  Please validate, then delete the *.nil files from your desktop");
+Console.WriteLine($"Hard drive is now full!  Please validate, then delete the *.nil files from {driveName}:\\");
