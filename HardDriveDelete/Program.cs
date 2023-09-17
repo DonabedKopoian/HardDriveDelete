@@ -55,9 +55,10 @@ Guid fileName = Guid.NewGuid();
 
 while (driveName is not null && totalFreeSpace > 0)
 {
+	FileStream tempFile = null;
 	try
 	{
-		FileStream tempFile = new FileStream(
+		tempFile = new FileStream(
 			@$"{driveName}:\{fileName}{fileNumber:D3}.nil",
 			FileMode.Create,
 			FileAccess.Write,
@@ -86,12 +87,16 @@ while (driveName is not null && totalFreeSpace > 0)
 		fileSize = totalFreeSpace;
 	}
 
-	for (int i = 0; i < fileSize; i++)
+	if (tempFile is not null)
 	{
-		tempFile.WriteByte(0);
+		for (int i = 0; i < fileSize; i++)
+		{
+			tempFile.WriteByte(0);
+		}
 	}
 
-	Console.WriteLine($"Progress: {(decimal)totalFiles/fileNumber++:F2}%");
+	Console.WriteLine($"Progress: {(decimal)totalFiles/++fileNumber:F2}%");
 }
 
 Console.WriteLine($"Hard drive is now full!  Please validate, then delete the *.nil files from {driveName}:\\");
+Console.ReadLine();
