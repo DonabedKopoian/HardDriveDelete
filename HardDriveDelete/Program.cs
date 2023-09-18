@@ -68,7 +68,7 @@ while (driveName is not null && totalFreeSpace > 0)
 	{
 		if (e is UnauthorizedAccessException)
 		{
-			Console.WriteLine("Please exit this program and run as an administrator");
+			Console.WriteLine("Please exit this program and run as an administrator.");
 		}
 		else
 		{
@@ -98,5 +98,5 @@ while (driveName is not null && totalFreeSpace > 0)
 	Console.WriteLine($"Progress: {++fileNumber * 100.00m / totalFiles:F2}%");
 }
 
-Console.WriteLine($"Hard drive is now full!  Please validate, then delete the *.nil files from {driveName}:\\");
+Console.WriteLine($"Hard drive is now full!  Please validate, then delete the *.nil files from {driveName}:\\.");
 Console.ReadLine();
