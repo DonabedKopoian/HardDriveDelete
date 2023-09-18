@@ -55,7 +55,7 @@ Guid fileName = Guid.NewGuid();
 
 while (driveName is not null && totalFreeSpace > 0)
 {
-	FileStream tempFile = null;
+	FileStream? tempFile = null;
 	try
 	{
 		tempFile = new FileStream(
