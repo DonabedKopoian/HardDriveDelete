@@ -95,7 +95,7 @@ while (driveName is not null && totalFreeSpace > 0)
 		}
 	}
 
-	Console.WriteLine($"Progress: {(decimal)totalFiles/++fileNumber:F2}%");
+	Console.WriteLine($"Progress: {++fileNumber * 100.00m / totalFiles:F2}%");
 }
 
 Console.WriteLine($"Hard drive is now full!  Please validate, then delete the *.nil files from {driveName}:\\");
